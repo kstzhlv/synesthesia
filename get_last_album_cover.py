@@ -1,9 +1,10 @@
+from io import BytesIO
+
 import requests
+from PIL import Image
 
-from environment_variables import api_key
 
-
-def get_last_album_cover(username: str):
+def get_last_album_cover(username: str, api_key: str):
     url = "https://ws.audioscrobbler.com/2.0/"
     params = {
         "method": "user.getrecenttracks",
@@ -24,3 +25,10 @@ def get_last_album_cover(username: str):
             return image["#text"]
 
     return ""
+
+
+def turn_link_into_image(image_url: str) -> Image.Image:
+    response = requests.get(image_url)
+    img = Image.open(BytesIO(response.content)).convert("RGB")
+
+    return img
