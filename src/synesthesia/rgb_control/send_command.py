@@ -5,6 +5,9 @@ import asyncio
 from bleak import BleakClient
 from loguru import logger
 
+# local
+from synesthesia.get_main_hue import album_led_hex
+
 MAC = "be:59:a4:01:7b:84"
 CHAR_UUID = "0000fff3-0000-1000-8000-00805f9b34fb"  
 
@@ -46,7 +49,8 @@ class RGBController:
 
 async def main():
     async with RGBController(MAC, CHAR_UUID) as rgb:
-        await rgb.send("0000ff")
+        colour_hex = album_led_hex("/home/decent/Downloads/e6dad3511191c1dc67ba6fc517fcd5ac-3645012067.png")
+        await rgb.send(colour_hex)
 
 
 if __name__ == "__main__":
