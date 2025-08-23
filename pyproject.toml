@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "bleak>=1.1.0",
+    "loguru>=0.7.3",
     "pic>=0.1.0",
     "requests>=2.32.5",
 ]
