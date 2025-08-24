@@ -1,12 +1,7 @@
-# Stadard
-import asyncio
 
 # Third-party
 from bleak import BleakClient
 from loguru import logger
-
-# local
-from synesthesia.get_main_hue import get_main_hue_hex
 
 
 class RGBController:
@@ -34,23 +29,11 @@ class RGBController:
     async def send(self, colour_hex: str):
         if len(colour_hex) != 6:
             logger.error("Length of colour hex must be 6")
-        try:
-            data = bytes.fromhex("".join([self.COMMAND_PREFIX, colour_hex, self.COMMAND_POSTFIX]))
-            if self.client:
-                await self.client.write_gatt_char(self.char_uuid, data, response=False)
-                logger.info(f"Sent {data.hex()} to {self.char_uuid}")
-            else:
-                logger.error("Can't send colour command: connection is not asstablished")
-        except Exception as e:
-            logger.error(f"Failed to send {colour_hex}: {e}")
 
+        data = bytes.fromhex("".join([self.COMMAND_PREFIX, colour_hex, self.COMMAND_POSTFIX]))
+        if self.client:
+            await self.client.write_gatt_char(self.char_uuid, data, response=False)
+            logger.info(f"Sent {data.hex()} to {self.char_uuid}")
+        else:
+            logger.error("Can't send colour command: connection is not asstablished")
 
-async def main():
-    async with RGBController(MAC, CHAR_UUID) as rgb:
-        colour_hex = get_main_hue_hex("/home/decent/Downloads/covers/figure_eight.jpg")
-        logger.info(f"Color hex: {colour_hex}")
-        await rgb.send(colour_hex)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
