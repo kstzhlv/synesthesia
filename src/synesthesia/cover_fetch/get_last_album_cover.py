@@ -4,7 +4,7 @@ import requests
 from PIL import Image
 
 
-def get_last_album_cover(username: str, api_key: str):
+def get_last_album_cover(username: str, api_key: str) -> tuple[str, str] | None:
     url = "https://ws.audioscrobbler.com/2.0/"
     params = {
         "method": "user.getrecenttracks",
@@ -18,13 +18,12 @@ def get_last_album_cover(username: str, api_key: str):
     data = response.json()
 
     track = data["recenttracks"]["track"][0]
+    album_name  = track["album"]["#text"]
     images = track.get("image", [])
 
     for image in reversed(images):
         if image.get("#text"):
-            return image["#text"]
-
-    return ""
+            return album_name, image["#text"]
 
 
 def turn_link_into_image(image_url: str) -> Image.Image:

@@ -8,8 +8,6 @@ from loguru import logger
 # local
 from synesthesia.get_main_hue import get_main_hue_hex
 
-MAC = "be:59:a4:01:7b:84"
-CHAR_UUID = "0000fff3-0000-1000-8000-00805f9b34fb"  
 
 class RGBController:
     COMMAND_PREFIX = "7e070503"
