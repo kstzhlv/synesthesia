@@ -50,7 +50,7 @@ class RGBController:
 async def main():
     async with RGBController(MAC, CHAR_UUID) as rgb:
         colour_hex = album_led_hex("/home/decent/Downloads/e6dad3511191c1dc67ba6fc517fcd5ac-3645012067.png")
-        await rgb.send(colour_hex)
+        await rgb.send("ff001b")
 
 
 if __name__ == "__main__":
