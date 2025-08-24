@@ -6,7 +6,7 @@ from bleak import BleakClient
 from loguru import logger
 
 # local
-from synesthesia.get_main_hue import album_led_hex
+from synesthesia.get_main_hue import get_main_hue_hex
 
 MAC = "be:59:a4:01:7b:84"
 CHAR_UUID = "0000fff3-0000-1000-8000-00805f9b34fb"  
@@ -49,8 +49,9 @@ class RGBController:
 
 async def main():
     async with RGBController(MAC, CHAR_UUID) as rgb:
-        colour_hex = album_led_hex("/home/decent/Downloads/e6dad3511191c1dc67ba6fc517fcd5ac-3645012067.png")
-        await rgb.send("ff001b")
+        colour_hex = get_main_hue_hex("/home/decent/Downloads/covers/OK_Computer.jpg")
+        logger.info(f"Color hex: {colour_hex}")
+        await rgb.send(colour_hex)
 
 
 if __name__ == "__main__":
