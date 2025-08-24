@@ -31,7 +31,7 @@ class RGBController:
         if self.client:
             await self.client.__aexit__(exc_type, exc_val, exc_tb)
 
-        print(f"Disconnected from {self.address}")
+        logger.warning(f"Disconnected from {self.address}")
 
     async def send(self, colour_hex: str):
         if len(colour_hex) != 6:
@@ -49,7 +49,7 @@ class RGBController:
 
 async def main():
     async with RGBController(MAC, CHAR_UUID) as rgb:
-        colour_hex = get_main_hue_hex("/home/decent/Downloads/covers/OK_Computer.jpg")
+        colour_hex = get_main_hue_hex("/home/decent/Downloads/covers/figure_eight.jpg")
         logger.info(f"Color hex: {colour_hex}")
         await rgb.send(colour_hex)
 

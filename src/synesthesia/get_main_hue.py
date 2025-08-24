@@ -1,7 +1,9 @@
-# Third-party
-from PIL import Image, ImageStat
+# Standart
 import colorsys
 from collections import Counter
+
+# Third-party
+from PIL import Image, ImageStat
 
 def _clamp8(x: int) -> int:
     return max(0, min(255, int(round(x))))
@@ -16,6 +18,7 @@ def _snap_colour(rgb: tuple[int, int, int]):
     out[max_idx] = 255
     out[mid_idx] = _clamp8(v[mid_idx] // 5)
     out[min_idx] = 0
+
 
     return tuple(out)
 
