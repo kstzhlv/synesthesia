@@ -14,7 +14,6 @@ async def resolve_bluetooth_device(
     scanning_mode: Literal["active", "passive"] = "active",
 ):
     mac = (mac or "").strip().lower()
-    print(mac)
     name_hint = (name_hint or "").strip()
 
     scanner = BleakScanner(adapter=adapter, scanning_mode=scanning_mode)

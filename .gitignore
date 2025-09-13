@@ -209,3 +209,5 @@ uv.lock
 
 .api_key
 environment_variables.py
+.env.py
+shit.py
