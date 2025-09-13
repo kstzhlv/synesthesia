@@ -1,6 +1,6 @@
 [project]
 name = "synesthesia"
-version = "0.1.0"
+version = "0.2.0"
 description = "Default template for PDM package"
 authors = [
     {name = "Codeling&Decent", email = ""},
@@ -19,6 +19,13 @@ license = {text = "MIT"}
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-
 [tool.pdm]
 distribution = true
+
+[tool.pdm.build]
+package-dir = "src"
+includes = ["src/"]
+
+[project.scripts]
+synesthesia = "synesthesia.main:main"
+
